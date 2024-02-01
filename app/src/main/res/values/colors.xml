@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- White color, use for most text with primaryBackground -->
+    <color name="primaryText">#F9F9F9</color>
+
+    <!-- Light grey color, use with secondaryBackground -->
+    <color name="secondaryText">#B3B3B3</color>
+
+    <!-- Dark grey background color, use for primaryText -->
+    <color name="primaryBackgroundColor">#606060</color>
+
+    <!-- Black background color, use for secondaryText -->
+    <color name="secondaryBackgroundColor">#000000</color>
 </resources>
