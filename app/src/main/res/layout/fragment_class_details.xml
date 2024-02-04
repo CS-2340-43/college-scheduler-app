@@ -1,50 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryBackgroundColor"
 
-    tools:context=".ClassDetails">
+    tools:context=".CourseDetailsFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
 
         <LinearLayout
-            android:orientation="vertical" android:layout_width="match_parent"
+            android:id="@+id/course_form"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="1">
+            android:background="@color/secondaryBackgroundColor"
+            android:orientation="vertical"
+            android:padding="15dp" >
 
-            <EditText
+            <TextView
+                android:id="@+id/course_form_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/id"
-                android:hint="Course Name" />
+                android:layout_marginBottom="15dp"
+                android:text="Add Course Details"
+                android:textColor="@color/highlight"
+                android:textSize="@dimen/large"
+                android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/course_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/name"
-                android:hint="Instructor" />
+                android:hint="Course Name"
+                android:text="Course Name"
+                android:textColor="@color/secondaryText" />
 
             <EditText
+                android:id="@+id/course_instructor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/fname"
-                android:hint="Time" />
+                android:hint="Instructor"
+                android:text="Instructor"
+                android:textColor="@color/secondaryText" />
+
+            <EditText
+                android:id="@+id/course_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Time"
+                android:inputType="time"
+                android:text="Time"
+                android:textColor="@color/secondaryText" />
+
+            <LinearLayout
+                android:id="@+id/course_dates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/monday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="M"
+                    android:textColor="@color/secondaryText" />
+
+                <CheckBox
+                    android:id="@+id/tuesday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TU"
+                    android:textColor="@color/secondaryText" />
+
+                <CheckBox
+                    android:id="@+id/wednesday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="W"
+                    android:textColor="@color/secondaryText" />
+
+                <CheckBox
+                    android:id="@+id/thursday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TH"
+                    android:textColor="@color/secondaryText" />
+
+                <CheckBox
+                    android:id="@+id/friday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="F"
+                    android:textColor="@color/secondaryText" />
+            </LinearLayout>
 
             <Button
+                android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/Submit"
-                android:hint="Submit" />
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/highlight"
+                android:hint="Submit"
+                android:text="Submit"
+                android:textColor="@color/secondaryBackgroundColor" />
 
 
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/no_class_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="No classes to show yet :/"
+            android:textColor="@color/highlight"
+            android:textSize="@dimen/medium" />
+
+        <ListView
+            android:id="@+id/courses_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="40.0dp" />
+    </LinearLayout>
+</LinearLayout>

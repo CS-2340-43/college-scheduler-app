@@ -11,4 +11,7 @@
 
     <!-- Black background color, use for secondaryText -->
     <color name="secondaryBackgroundColor">#1b1b1b</color>
+
+    <!-- Yellow -->
+    <color name="highlight">#e8c343</color>
 </resources>
