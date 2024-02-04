@@ -113,18 +113,7 @@
                 android:hint="Submit"
                 android:text="Submit"
                 android:textColor="@color/secondaryBackgroundColor" />
-
-
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/no_class_placeholder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="No classes to show yet :/"
-            android:textColor="@color/highlight"
-            android:textSize="@dimen/medium" />
 
         <ListView
             android:id="@+id/courses_list"
@@ -133,5 +122,6 @@
             android:layout_marginTop="15dp"
             android:divider="@android:color/transparent"
             android:dividerHeight="40.0dp" />
+
     </LinearLayout>
 </LinearLayout>

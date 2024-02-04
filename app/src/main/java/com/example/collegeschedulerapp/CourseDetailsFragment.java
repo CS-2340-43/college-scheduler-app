@@ -25,7 +25,6 @@ public class CourseDetailsFragment extends Fragment {
     ArrayList<CourseDetails> courses = new ArrayList<>();
     ListView listView;
     CourseDetailsAdapter adapter;
-    TextView listPlaceHolder;
     EditText courseNameField;
     EditText courseInstructorField;
     EditText courseTimeField;
@@ -136,10 +135,6 @@ public class CourseDetailsFragment extends Fragment {
         adapter.notifyDataSetChanged();
 
         Log.d("Number of courses", Integer.toString(adapter.getCount()));
-
-        // Modify visibility of placeholder and listview
-        listView.setVisibility(View.VISIBLE);
-        listPlaceHolder.setVisibility(View.INVISIBLE);
     };
 
     @Override
@@ -153,7 +148,6 @@ public class CourseDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_class_details, container, false);
 
         // Set view global variables
-        listPlaceHolder = view.findViewById(R.id.no_class_placeholder);
         courseNameField = view.findViewById(R.id.course_name);
         courseInstructorField = view.findViewById(R.id.course_instructor);
         courseTimeField = view.findViewById(R.id.course_time);

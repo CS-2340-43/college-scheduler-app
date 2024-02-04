@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -53,6 +54,15 @@ public class CourseDetailsAdapter extends BaseAdapter {
         instructorTextView.setText(currentCourse.getInstructor());
         timeTextView.setText(currentCourse.getTime());
         dateTextView.setText(currentCourse.getDates());
+
+        // Add delete button listener
+
+        Button deleteButton = convertView.findViewById(R.id.delete_button);
+
+        deleteButton.setOnClickListener(v -> {
+            courseList.remove(getItem(position));
+            notifyDataSetChanged();
+        });
 
         return convertView;
     }

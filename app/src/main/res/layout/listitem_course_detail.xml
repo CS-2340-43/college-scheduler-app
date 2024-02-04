@@ -42,5 +42,15 @@
         android:layout_height="wrap_content"
         android:text="Course Dates"
         android:textColor="@color/highlight"
-        android:textSize="@dimen/medium" />
+        android:textSize="@dimen/medium"
+        android:layout_marginBottom="15dp" />
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/highlight"
+        android:text="Delete"
+        android:textColor="@color/primaryBackgroundColor"
+        android:layout_gravity="end" />
 </LinearLayout>
