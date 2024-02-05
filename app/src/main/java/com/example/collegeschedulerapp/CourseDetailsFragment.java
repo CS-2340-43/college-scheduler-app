@@ -37,6 +37,7 @@ public class CourseDetailsFragment extends Fragment {
     public CourseDetailsFragment() {}
 
     private void clearForm() {
+        formHeader.setText("Add Course Detail");
         courseNameField.setText("");
         courseInstructorField.setText("");
         courseTimeField.setText("");
@@ -130,6 +131,7 @@ public class CourseDetailsFragment extends Fragment {
             courses.add(course);
         } else {
             courses.set(editingIndex, course);
+            editingIndex = -1;
         }
 
         // Clear the form

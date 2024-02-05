@@ -146,14 +146,14 @@ public class TodoListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_class_details, container, false);
 
         // Set view global variables
-        formHeader = view.findViewById(R.id.todo_form_header);
-        todoField = view.findViewById(R.id.todo);
-        detailsField = view.findViewById(R.id.course_instructor);
-        dateField = view.findViewById(R.id.course_time);
+//        formHeader = view.findViewById(R.id.todo_form_header);
+//        todoField = view.findViewById(R.id.todo);
+//        detailsField = view.findViewById(R.id.course_instructor);
+//        dateField = view.findViewById(R.id.course_time);
 
         // Initialize adapter to monitor changes to data
         if (adapter == null) {
-            adapter = new CourseDetailsAdapter(this, requireContext(), courses);
+            //adapter = new CourseDetailsAdapter(this, requireContext(), todos);
             listView = view.findViewById(R.id.courses_list);
             listView.setAdapter(adapter);
         }

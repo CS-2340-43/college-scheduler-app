@@ -23,11 +23,8 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        //binding = FragmentFirstBinding.inflate(inflater, container, false);
-        binding2 = FragmentSecondBinding.inflate(inflater, container, false);
-        //return binding.getRoot();
-        return binding2.getRoot();
-
+        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -37,15 +34,15 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_CourseDetailsFragment);
+                        .navigate(R.id.action_FirstFragment_to_TodoFragment);
             }
         });
 
         binding2.buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_TodoListFragment);
+//                NavHostFragment.findNavController(FirstFragment.this)
+//                        .navigate(R.id.action_FirstFragment_to_TodoListFragment);
             }
         });
 
