@@ -14,6 +14,10 @@
         <action
             android:id="@+id/action_FirstFragment_to_CourseDetailsFragment"
             app:destination="@id/CourseDetailsFragment" />
+        <action
+            android:id="@+id/todoListFragment"
+            app:popUpTo="@id/FirstFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
