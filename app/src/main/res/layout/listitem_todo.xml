@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/secondaryBackgroundColor"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:id="@+id/todo_title_list_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Todo Name - Todo Class"
+        android:textColor="@color/highlight"
+        android:textSize="@dimen/large" />
+
+    <TextView
+        android:id="@+id/todo_description_list_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Todo Description"
+        android:textColor="@color/secondaryText"
+        android:textSize="@dimen/small" />
+
+    <TextView
+        android:id="@+id/todo_due_at_list_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Todo Due At"
+        android:textColor="@color/secondaryText"
+        android:textSize="@dimen/small" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/highlight"
+            android:text="Edit"
+            android:textColor="@color/primaryBackgroundColor"
+            android:layout_marginEnd="10dp"/>
+
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/highlight"
+            android:text="Delete"
+            android:textColor="@color/primaryBackgroundColor" />
+    </LinearLayout>
+
+</LinearLayout>
