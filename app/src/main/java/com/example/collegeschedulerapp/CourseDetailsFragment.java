@@ -25,12 +25,27 @@ public class CourseDetailsFragment extends Fragment {
     ArrayList<CourseDetails> courses = new ArrayList<>();
     ListView listView;
     CourseDetailsAdapter adapter;
+
+    TextView formHeader;
     EditText courseNameField;
     EditText courseInstructorField;
     EditText courseTimeField;
     CheckBox[] courseDatesField;
 
+    private int editingIndex = -1; // Keep track of what item we are editing
+
     public CourseDetailsFragment() {}
+
+    private void clearForm() {
+        courseNameField.setText("");
+        courseInstructorField.setText("");
+        courseTimeField.setText("");
+        courseDatesField[0].setChecked(false);
+        courseDatesField[1].setChecked(false);
+        courseDatesField[2].setChecked(false);
+        courseDatesField[3].setChecked(false);
+        courseDatesField[4].setChecked(false);
+    }
 
     /**
      * Use this factory method to create a new instance of
@@ -86,24 +101,6 @@ public class CourseDetailsFragment extends Fragment {
     }
 
     /**
-     * Builds the displayed course dates string for list_item_course_detail
-     *
-     * @param courseDates an array of selected dates
-     * @return a string to display with chosen dates
-     */
-    private String buildCourseDatesString(boolean[] courseDates) {
-        String s = "";
-
-        if (courseDates[0]) s += "M ";
-        if (courseDates[1]) s += "TU ";
-        if (courseDates[2]) s += "W ";
-        if (courseDates[3]) s += "TH ";
-        if (courseDates[4]) s += "F ";
-
-        return s.substring(0, s.length() - 1);
-    }
-
-    /**
      * Handle form submission
      *
      * @param view The select buttons view
@@ -113,7 +110,7 @@ public class CourseDetailsFragment extends Fragment {
         String courseName = courseNameField.getText().toString();
         String courseInstructor = courseInstructorField.getText().toString();
         String courseTime = courseTimeField.getText().toString();
-        boolean[] courseDatesList = {
+        boolean[] courseDates = {
                 courseDatesField[0].isChecked(),
                 courseDatesField[1].isChecked(),
                 courseDatesField[2].isChecked(),
@@ -122,20 +119,55 @@ public class CourseDetailsFragment extends Fragment {
         };
 
         // Check if fields are valid, throw toasts if not
-        boolean isValid = validation(courseName, courseInstructor, courseTime, courseDatesList);
+        boolean isValid = validation(courseName, courseInstructor, courseTime, courseDates);
 
         // Exit if fields are invalid
         if (!isValid) return;
 
-        // Create course dates string only if needed
-        String courseDates = buildCourseDatesString(courseDatesList);
-
         CourseDetails course = new CourseDetails(courseName, courseInstructor, courseTime, courseDates);
-        courses.add(course);
-        adapter.notifyDataSetChanged();
 
-        Log.d("Number of courses", Integer.toString(adapter.getCount()));
+        if (editingIndex < 0) {
+            courses.add(course);
+        } else {
+            courses.set(editingIndex, course);
+        }
+
+        // Clear the form
+        clearForm();
+
+        // Notify data change
+        adapter.notifyDataSetChanged();
     };
+
+    View.OnClickListener handleCancel = (View view) -> {
+        clearForm();
+        editingIndex = -1;
+        formHeader.setText("Add Course Details");
+    };
+
+    /**
+     * Changes the add form to an edit form
+     *
+     * @param position the index of the element to load into the edit form
+     */
+    public void handleEditSelect(int position) {
+        CourseDetails course = courses.get(position);
+
+        // Set fields with selected courses data
+        courseNameField.setText(course.getName());
+        courseInstructorField.setText(course.getInstructor());
+        courseTimeField.setText(course.getTime());
+
+        boolean[] dates = course.getDatesArray();
+        courseDatesField[0].setChecked(dates[0]);
+        courseDatesField[1].setChecked(dates[1]);
+        courseDatesField[2].setChecked(dates[2]);
+        courseDatesField[3].setChecked(dates[3]);
+        courseDatesField[4].setChecked(dates[4]);
+
+        formHeader.setText("Edit Course Details");
+        editingIndex = position;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -148,6 +180,7 @@ public class CourseDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_class_details, container, false);
 
         // Set view global variables
+        formHeader = view.findViewById(R.id.course_form_header);
         courseNameField = view.findViewById(R.id.course_name);
         courseInstructorField = view.findViewById(R.id.course_instructor);
         courseTimeField = view.findViewById(R.id.course_time);
@@ -162,13 +195,18 @@ public class CourseDetailsFragment extends Fragment {
 
         // Initialize adapter to monitor changes to data
         if (adapter == null) {
-            adapter = new CourseDetailsAdapter(requireContext(), courses);
+            adapter = new CourseDetailsAdapter(this, requireContext(), courses);
             listView = view.findViewById(R.id.courses_list);
             listView.setAdapter(adapter);
         }
 
         // Initialize click listener for submit
         view.findViewById(R.id.submit).setOnClickListener(handleSubmit);
+
+        // Initialize click listener for cancel
+        view.findViewById(R.id.cancel).setOnClickListener(handleCancel);
+
         return view;
+
     }
 }

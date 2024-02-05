@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Course Name"
-                android:text="Course Name"
+                android:textColorHint="@color/secondaryText"
                 android:textColor="@color/secondaryText" />
 
             <EditText
@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Instructor"
-                android:text="Instructor"
+                android:textColorHint="@color/secondaryText"
                 android:textColor="@color/secondaryText" />
 
             <EditText
@@ -53,8 +53,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Time"
+                android:textColorHint="@color/secondaryText"
                 android:inputType="time"
-                android:text="Time"
                 android:textColor="@color/secondaryText" />
 
             <LinearLayout
@@ -102,17 +102,36 @@
                     android:layout_weight="1"
                     android:text="F"
                     android:textColor="@color/secondaryText" />
+
             </LinearLayout>
 
-            <Button
-                android:id="@+id/submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:backgroundTint="@color/highlight"
-                android:hint="Submit"
-                android:text="Submit"
-                android:textColor="@color/secondaryBackgroundColor" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:backgroundTint="@color/highlight"
+                    android:hint="Submit"
+                    android:text="Submit"
+                    android:textColor="@color/secondaryBackgroundColor" />
+
+                <Button
+                    android:id="@+id/cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:backgroundTint="@color/highlight"
+                    android:hint="Cancel"
+                    android:text="Cancel"
+                    android:textColor="@color/secondaryBackgroundColor" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <ListView

@@ -11,10 +11,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class CourseDetailsAdapter extends BaseAdapter {
+    private CourseDetailsFragment fragment;
     private Context context;
     private ArrayList<CourseDetails> courseList;
 
-    public CourseDetailsAdapter(Context c, ArrayList<CourseDetails> cl) {
+    public CourseDetailsAdapter(CourseDetailsFragment f, Context c, ArrayList<CourseDetails> cl) {
+        fragment = f;
         context = c;
         courseList = cl;
     }
@@ -32,6 +34,16 @@ public class CourseDetailsAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    public void updateCourse(int position, CourseDetails updatedCourse) {
+        courseList.set(position, updatedCourse);
+        notifyDataSetChanged();
+    }
+
+    public void deleteCourse(int position) {
+        courseList.remove(getItem(position));
+        notifyDataSetChanged();
     }
 
     @Override
@@ -56,12 +68,17 @@ public class CourseDetailsAdapter extends BaseAdapter {
         dateTextView.setText(currentCourse.getDates());
 
         // Add delete button listener
-
         Button deleteButton = convertView.findViewById(R.id.delete_button);
 
         deleteButton.setOnClickListener(v -> {
-            courseList.remove(getItem(position));
-            notifyDataSetChanged();
+            deleteCourse(position);
+        });
+
+        // add code for editButton listener triggering the open form
+
+        Button editButton = convertView.findViewById(R.id.edit_button);
+        editButton.setOnClickListener(v -> {
+            fragment.handleEditSelect(position);
         });
 
         return convertView;
