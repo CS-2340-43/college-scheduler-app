@@ -7,8 +7,11 @@
     <color name="secondaryText">#B3B3B3</color>
 
     <!-- Dark grey background color, use for primaryText -->
-    <color name="primaryBackgroundColor">#606060</color>
+    <color name="primaryBackgroundColor">#333333</color>
 
     <!-- Black background color, use for secondaryText -->
-    <color name="secondaryBackgroundColor">#000000</color>
+    <color name="secondaryBackgroundColor">#1b1b1b</color>
+
+    <!-- Yellow -->
+    <color name="highlight">#e8c343</color>
 </resources>

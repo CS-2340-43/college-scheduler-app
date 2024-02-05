@@ -12,17 +12,14 @@
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_FirstFragment_to_CourseDetailsFragment"
+            app:destination="@id/CourseDetailsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.collegeschedulerapp.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
 
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+    <fragment
+        android:id="@+id/CourseDetailsFragment"
+        android:name="com.example.collegeschedulerapp.CourseDetailsFragment"
+        android:label="@string/course_details_fragment_label"
+        tools:layout="@layout/fragment_class_details">
     </fragment>
 </navigation>
