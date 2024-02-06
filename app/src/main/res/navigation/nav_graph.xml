@@ -12,8 +12,12 @@
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_TodoFragment"
-            app:destination="@id/TodosFragment" />
+            android:id="@+id/action_FirstFragment_to_CourseDetailsFragment"
+            app:destination="@id/CourseDetailsFragment" />
+        <action
+            android:id="@+id/todoListFragment"
+            app:popUpTo="@id/FirstFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -21,12 +25,5 @@
         android:name="com.example.collegeschedulerapp.CourseDetailsFragment"
         android:label="@string/course_details_fragment_label"
         tools:layout="@layout/fragment_class_details">
-    </fragment>
-
-    <fragment
-        android:id="@+id/TodosFragment"
-        android:name="com.example.collegeschedulerapp.TodoFragment"
-        android:label="Todo"
-        tools:layout="@layout/fragment_todo">
     </fragment>
 </navigation>
