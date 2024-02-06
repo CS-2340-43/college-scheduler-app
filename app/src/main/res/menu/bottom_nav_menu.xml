@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal">
+    <item
+        android:id="@+id/FirstFragment"
+        android:title="Home Page" />
+
+    <item
+        android:id="@+id/CourseDetailsFragment"
+        android:title="Course Details" />
+
+    <item
+        android:id="@+id/ExamFragment"
+        android:title="Exams" />
+
+    <item
+        android:id="@+id/TodoFragment"
+        android:title="Todos" />
+</menu>
