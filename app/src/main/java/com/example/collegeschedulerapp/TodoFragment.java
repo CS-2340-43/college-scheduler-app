@@ -2,6 +2,8 @@ package com.example.collegeschedulerapp;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -22,6 +24,8 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class TodoFragment extends Fragment {
+    private final String KEY = "todos";
+
     private ArrayList<Todo> todos = new ArrayList<>();
     private ListView listView;
     private TodoAdapter adapter;
@@ -36,6 +40,26 @@ public class TodoFragment extends Fragment {
     private int editingIndex = -1; // Keep track of what item we are editing
 
     public TodoFragment() {}
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(KEY, todos);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(KEY)) {
+            ArrayList<Todo> prevTodos = savedInstanceState.getParcelableArrayList(KEY);
+
+            if (prevTodos != null) {
+                todos.addAll(prevTodos);
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
 
     private void clearForm() {
         formHeader.setText("Add Todo");
@@ -190,5 +214,10 @@ public class TodoFragment extends Fragment {
 
         return view;
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.collegeschedulerapp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -18,6 +21,8 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class AssignmentsFragment extends Fragment {
+    private final String KEY = "assignments";
+
     private ArrayList<Assignments> assignments = new ArrayList<>();
     private ListView listView;
     private AssignmentsAdapter adapter;
@@ -30,6 +35,26 @@ public class AssignmentsFragment extends Fragment {
     private int editingIndex = -1; // Keep track of what item we are editing
 
     public AssignmentsFragment() {}
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(KEY, assignments);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(KEY)) {
+            ArrayList<Assignments> prevAssignments = savedInstanceState.getParcelableArrayList(KEY);
+
+            if (prevAssignments != null) {
+                assignments.addAll(prevAssignments);
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
 
     private void clearForm() {
         formHeader.setText("Add Assignment");
@@ -137,7 +162,7 @@ public class AssignmentsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_todo, container, false);
+        View view = inflater.inflate(R.layout.fragment_assignments, container, false);
 
         // Set view global variables
         formHeader = view.findViewById(R.id.assignment_form_header);
@@ -160,5 +185,10 @@ public class AssignmentsFragment extends Fragment {
 
         return view;
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }

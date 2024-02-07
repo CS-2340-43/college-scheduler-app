@@ -1,9 +1,43 @@
 package com.example.collegeschedulerapp;
 
-public class Exam {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Exam implements Parcelable {
     private String name;
     private String date;
     private String location;
+
+
+    public Exam(Parcel in) {
+        name = in.readString();
+        date = in.readString();
+        location = in.readString();
+    }
+
+    public static final Parcelable.Creator<Exam> CREATOR = new Parcelable.Creator<Exam>() {
+        @Override
+        public Exam createFromParcel(Parcel in) {
+            return new Exam(in);
+        }
+
+        @Override
+        public Exam[] newArray(int size) {
+            return new Exam[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(date);
+        dest.writeString(location);
+    }
 
     public Exam(String cn, String ci, String ct) {
         name = cn;

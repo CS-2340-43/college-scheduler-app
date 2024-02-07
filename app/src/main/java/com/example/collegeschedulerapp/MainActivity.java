@@ -1,15 +1,19 @@
 package com.example.collegeschedulerapp;
 
+import static androidx.core.view.WindowInsetsCompat.toWindowInsetsCompat;
+
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
 import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -19,6 +23,8 @@ import com.example.collegeschedulerapp.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowInsets;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +50,24 @@ public class MainActivity extends AppCompatActivity {
 
         // Set up the ActionBar with the NavController and AppBarConfiguration
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+        // Define window
+        Window window = getWindow();
+
+        // Define mainNavigation
+        BottomNavigationView mainNavigation = binding.bottomNavigation;
+
+        // Remove navigation upon keyboard type
+        ((Window) window).getDecorView().setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+            @NonNull
+            @Override
+            public WindowInsets onApplyWindowInsets(@NonNull View v, @NonNull WindowInsets insets) {
+                WindowInsetsCompat insetsCompat = toWindowInsetsCompat(insets, v);
+                mainNavigation.setVisibility(insetsCompat.isVisible(WindowInsetsCompat.Type.ime()) ? View.GONE : View.VISIBLE);
+                v.onApplyWindowInsets(insets);
+                return insets;
+            }
+        });
     }
 
     @Override

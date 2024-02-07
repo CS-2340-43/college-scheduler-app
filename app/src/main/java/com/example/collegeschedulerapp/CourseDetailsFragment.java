@@ -2,6 +2,8 @@ package com.example.collegeschedulerapp;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -15,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +25,8 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class CourseDetailsFragment extends Fragment {
+    private final String KEY = "course_details";
+
     ArrayList<CourseDetails> courses = new ArrayList<>();
     ListView listView;
     CourseDetailsAdapter adapter;
@@ -35,6 +40,28 @@ public class CourseDetailsFragment extends Fragment {
     private int editingIndex = -1; // Keep track of what item we are editing
 
     public CourseDetailsFragment() {}
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        Log.d("SAVE STATE, COURSE COUNT: ", String.valueOf(courses.size()));
+
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(KEY, courses);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(KEY)) {
+            ArrayList<CourseDetails> prevCourses = savedInstanceState.getParcelableArrayList(KEY);
+
+            if (prevCourses != null) {
+                courses.addAll(prevCourses);
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
 
     private void clearForm() {
         formHeader.setText("Add Course Detail");
@@ -209,6 +236,10 @@ public class CourseDetailsFragment extends Fragment {
         view.findViewById(R.id.cancel).setOnClickListener(handleCancel);
 
         return view;
+    }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }

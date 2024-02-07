@@ -2,6 +2,8 @@ package com.example.collegeschedulerapp;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -22,6 +24,8 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class ExamFragment extends Fragment {
+    private final String KEY = "exams";
+
     private ArrayList<Exam> exams = new ArrayList<>();
     private ListView listView;
     private ExamAdapter adapter;
@@ -34,6 +38,26 @@ public class ExamFragment extends Fragment {
     private int editingIndex = -1; // Keep track of what item we are editing
 
     public ExamFragment() {}
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(KEY, exams);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(KEY)) {
+            ArrayList<Exam> prevExams = savedInstanceState.getParcelableArrayList(KEY);
+
+            if (prevExams != null) {
+                exams.addAll(prevExams);
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
 
     private void clearForm() {
         formHeader.setText("Add Exam");
@@ -168,5 +192,10 @@ public class ExamFragment extends Fragment {
 
         return view;
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }

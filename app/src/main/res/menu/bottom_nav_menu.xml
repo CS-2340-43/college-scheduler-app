@@ -11,6 +11,10 @@
         android:title="Course Details" />
 
     <item
+        android:id="@+id/AssignmentsFragment"
+        android:title="Assignments" />
+
+    <item
         android:id="@+id/ExamFragment"
         android:title="Exams" />
 

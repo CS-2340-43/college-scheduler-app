@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ExamAdapter extends BaseAdapter{
+public class ExamAdapter extends BaseAdapter {
     private ExamFragment fragment;
     private Context context;
     private ArrayList<Exam> examList;
@@ -50,7 +50,7 @@ public class ExamAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.listitem_course_detail, parent, false);
+            convertView = inflater.inflate(R.layout.listitem_exam, parent, false);
         }
 
         // Get the current course

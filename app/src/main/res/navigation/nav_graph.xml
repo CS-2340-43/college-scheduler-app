@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.example.collegeschedulerapp.FirstFragment"
-        android:label="@string/first_fragment_label"
+        android:label="Home Page"
         tools:layout="@layout/fragment_first">
     </fragment>
 
@@ -20,16 +20,23 @@
     </fragment>
 
     <fragment
+        android:id="@+id/AssignmentsFragment"
+        android:name="com.example.collegeschedulerapp.AssignmentsFragment"
+        android:label="Assignments"
+        tools:layout="@layout/fragment_class_details">
+    </fragment>
+
+    <fragment
         android:id="@+id/ExamFragment"
         android:name="com.example.collegeschedulerapp.ExamFragment"
-        android:label="Exam Fragment"
+        android:label="Exams"
         tools:layout="@layout/fragment_exam">
     </fragment>
 
     <fragment
         android:id="@+id/TodoFragment"
         android:name="com.example.collegeschedulerapp.TodoFragment"
-        android:label="Todo Fragment"
+        android:label="Todos"
         tools:layout="@layout/fragment_todo">
     </fragment>
 </navigation>

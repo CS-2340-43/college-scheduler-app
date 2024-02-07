@@ -1,10 +1,45 @@
 package com.example.collegeschedulerapp;
 
-public class CourseDetails {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class CourseDetails implements Parcelable {
     private String name;
     private String instructor;
     private String time;
     boolean[] dates;
+
+    public CourseDetails(Parcel in) {
+        name = in.readString();
+        instructor = in.readString();
+        time = in.readString();
+        dates = in.createBooleanArray();
+    }
+
+    public static final Creator<CourseDetails> CREATOR = new Creator<CourseDetails>() {
+        @Override
+        public CourseDetails createFromParcel(Parcel in) {
+            return new CourseDetails(in);
+        }
+
+        @Override
+        public CourseDetails[] newArray(int size) {
+            return new CourseDetails[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(instructor);
+        dest.writeString(time);
+        dest.writeBooleanArray(dates);
+    }
 
     public CourseDetails(String cn, String ci, String ct, boolean[] cd) {
         name = cn;
