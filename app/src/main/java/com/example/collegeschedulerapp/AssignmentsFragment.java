@@ -1,10 +1,12 @@
 package com.example.collegeschedulerapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,12 +25,17 @@ import java.util.ArrayList;
  */
 public class AssignmentsFragment extends Fragment {
     private final String KEY = "assignments";
+    private final String SORT_MODE = "sort_mode";
+
+    private boolean sortByDueDate = true;
 
     private ArrayList<Assignments> assignments = new ArrayList<>();
     private ListView listView;
     private AssignmentsAdapter adapter;
 
     private TextView formHeader;
+
+    private Button sortMode;
     private EditText assignmentsNameField;
     private EditText assignmentsClassField;
     private EditText assignmentsDueDateField;
@@ -40,6 +48,7 @@ public class AssignmentsFragment extends Fragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(KEY, assignments);
+        outState.putBoolean(SORT_MODE, sortByDueDate);
     }
 
     @Override
@@ -51,6 +60,14 @@ public class AssignmentsFragment extends Fragment {
 
             if (prevAssignments != null) {
                 assignments.addAll(prevAssignments);
+                sortByDueDate = savedInstanceState.getBoolean(SORT_MODE);
+
+                if (!sortByDueDate) {
+                    sortMode.setText("Sorting by Course");
+                }
+
+                sort();
+
                 adapter.notifyDataSetChanged();
             }
         }
@@ -61,6 +78,14 @@ public class AssignmentsFragment extends Fragment {
         assignmentsNameField.setText("");
         assignmentsClassField.setText("");
         assignmentsDueDateField.setText("");
+    }
+
+    private void sort() {
+        if (sortByDueDate) {
+            assignments.sort(AssignmentsComparator.sortByDueDateAscending());
+        } else {
+            assignments.sort(AssignmentsComparator.sortByClassNameAscending());
+        }
     }
 
     /**
@@ -128,6 +153,9 @@ public class AssignmentsFragment extends Fragment {
         // Clear the form
         clearForm();
 
+        // Sort the list
+        sort();
+
         // Notify data change
         adapter.notifyDataSetChanged();
     };
@@ -159,6 +187,7 @@ public class AssignmentsFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -166,6 +195,7 @@ public class AssignmentsFragment extends Fragment {
 
         // Set view global variables
         formHeader = view.findViewById(R.id.assignment_form_header);
+        sortMode = view.findViewById(R.id.sort_mode);
         assignmentsNameField = view.findViewById(R.id.assignment_name);
         assignmentsClassField = view.findViewById(R.id.assignment_course);
         assignmentsDueDateField = view.findViewById(R.id.assignment_date_due);
@@ -183,8 +213,20 @@ public class AssignmentsFragment extends Fragment {
         // Initialize click listener for cancel
         view.findViewById(R.id.cancel).setOnClickListener(handleCancel);
 
-        return view;
+        // Set up click listener for sort mode
+        sortMode.setOnClickListener((v) -> {
+            if (sortByDueDate) {
+                sortMode.setText("Sorting by Course");
+            } else {
+                sortMode.setText("Sorting by Due Date");
+            }
 
+            sortByDueDate = !sortByDueDate;
+            sort();
+            adapter.notifyDataSetChanged();
+        });
+
+        return view;
     }
 
     @Override

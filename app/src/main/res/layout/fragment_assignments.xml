@@ -86,6 +86,16 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/sort_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sorting by Due Date"
+            android:hint="Sort"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/highlight"
+            android:textColor="@color/primaryBackgroundColor" />
+
         <ListView
             android:id="@+id/assignments_list"
             android:layout_width="match_parent"
